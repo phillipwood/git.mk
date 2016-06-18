@@ -251,11 +251,15 @@ $(srcdir)/.gitignore: Makefile.am $(top_srcdir)/git.mk
 				"po/*.mo" \
 				"po/*.sed" \
 				"po/*.sin" \
-				po/$(GETTEXT_PACKAGE).pot \
 				intltool-extract.in \
 				intltool-merge.in \
 				intltool-update.in \
 			; do echo "/$$x"; done; \
+			if test -z "$(GETTEXT_PACKAGE)"; then \
+				echo "/po/$(PACKAGE).pot"; \
+			else \
+				echo "/po/$(GETTEXT_PACKAGE).pot"; \
+			fi; \
 		fi; \
 		if test -f $(srcdir)/configure; then \
 			for x in \
